@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Application</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+	$(document).ready(function () {
+		$(document).on("keypress", "input", function(e){
+			if(e.which == 13){
+				var inputVal = $(this).val();
+				var spaceSeperatedList = inputVal.split(" ");
+				var searchValue = "" ;
+				for (var i = 0; i < spaceSeperatedList.length-1; i++) {
+					searchValue = spaceSeperatedList[i] + "+";
+				}
+				searchValue = searchValue + spaceSeperatedList[spaceSeperatedList.length-1];
+				$.ajax({
+				  type: "get",
+				  url: "https://api.giphy.com/v1/gifs/search?q="+searchValue+"&api_key=dc6zaTOxFJmzC&limit=5",
+				  success: function(data){
+					for(var i = 0 ; i < 5; i++) {
+						var id = "#"+i;
+						var link = data.data[i].images.preview_gif.url;
+						$(id).attr("src", "");
+						$(id).attr("src", link);
+						$(id).show();
+					}
+				  }
+				});	            
+			}
+		});
+		$("#0").click(function(){
+			var img = $('<img />', { 
+			  id: "img-0",
+			  src: $(this).attr('src')
+			});
+			img.appendTo($('.input'));
+			$(".search").toggle();
+		});
+		$("#1").click(function(){
+			var img = $('<img />', { 
+			  id: "img-1",
+			  src: $(this).attr('src')
+			});
+			img.appendTo($('.input'));
+			$(".search").toggle();
+		});
+		$("#2").click(function(){
+			var img = $('<img />', { 
+			  id: "img-2",
+			  src: $(this).attr('src')
+			});
+			img.appendTo($('.input'));
+			$(".search").toggle();
+		});
+		$("#3").click(function(){
+			var img = $('<img />', { 
+			  id: "img-3",
+			  src: $(this).attr('src')
+			});
+			img.appendTo($('.input'));
+			$(".search").toggle();
+		});
+		$("#4").click(function(){
+			var img = $('<img />', { 
+			  id: "img-4",
+			  src: $(this).attr('src')
+			});
+			img.appendTo($('.input'));
+			$(".search").toggle();
+		});		
+		$("#clickableAwesomeFont").click(function(){
+			$(".search").toggle();
+		});		
+	});
+	</script>
+	<style type="text/css">
+		.input {
+			height: 400px;
+			width: 400px;
+			border: 2px solid grey;
+			border-radius: 5px;			
+		}
+		.search {
+			height: 400px;
+			width: 400px;
+			border: 2px solid grey;
+			border-radius: 5px;
+			z-index: 1000;
+			overflow: auto;
+		}
+		#clickableAwesomeFont {
+			cursor: pointer
+		}		
+		#img-0 {
+			min-width: 150px;
+			min-height: 150px;
+			max-height: 150px;
+			max-width: 150px;
+		}
+		#img-1 {
+			min-width: 150px;
+			min-height: 150px;
+			max-height: 150px;
+			max-width: 150px;
+		}
+		#img-2 {
+			min-width: 150px;
+			min-height: 150px;
+			max-height: 150px;
+			max-width: 150px;
+		}
+		#img-3 {
+			min-width: 150px;
+			min-height: 150px;
+			max-height: 150px;
+			max-width: 150px;
+		}
+		#img-4 {
+			min-width: 150px;
+			min-height: 150px;
+			max-height: 150px;
+			max-width: 150px;
+		}				
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="input" contenteditable>Enter your message here.</div>
+		<div class="my-img">
+			<span id='clickableAwesomeFont'><i class="material-icons">attachment</i></span>
+		</div>
+		<div class="search" style="display: none;">
+			<input type="text" placeholder="search">
+			<img id="0" src="" style="display: none;">
+			<img id="1" src="" style="display: none;">
+			<img id="2" src="" style="display: none;">
+			<img id="3" src="" style="display: none;">
+			<img id="4" src="" style="display: none;">
+		</div>
+	</div>	
+</body>
+</html>
